@@ -1,36 +1,648 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Hello Github Pages</title>
-	<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/slate/bootstrap.min.css" rel="stylesheet" integrity="sha256-JcgoO7qVianjbv43Z5KinReHzk9/rEZg5m6z/ZZy3DI= sha512-rYMbEYJa5+7VkGdfAypdYHqwIdCNEBKh8lhKUNIv58tgHQuHHzXC/Bzf66BFDkTjq970Lc6OIEpgllKINGDCKQ==" crossorigin="anonymous">
-	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha256-VBrFgheoreGl4pKmWgZh3J23pJrhNlSUOBek+8Z2Gv0= sha512-i8+QythOYyQke6XbStjt9T4yQHhhM+9Y9yTY1fOxoDQwsQpKMEpIoSQZ8mVomtnVCf9PBvoQDnKl06gGOOD19Q==" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
-	<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-	<script src="//code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-</head>
-<body>
-	
-	<div class="container">
-		<h1>Hello World from Github Pages.</h1>
 
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bootstrap Form Generator</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/slate/bootstrap.min.css" rel="stylesheet" integrity="sha256-JcgoO7qVianjbv43Z5KinReHzk9/rEZg5m6z/ZZy3DI= sha512-rYMbEYJa5+7VkGdfAypdYHqwIdCNEBKh8lhKUNIv58tgHQuHHzXC/Bzf66BFDkTjq970Lc6OIEpgllKINGDCKQ==" crossorigin="anonymous">
+	<!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha256-VBrFgheoreGl4pKmWgZh3J23pJrhNlSUOBek+8Z2Gv0= sha512-i8+QythOYyQke6XbStjt9T4yQHhhM+9Y9yTY1fOxoDQwsQpKMEpIoSQZ8mVomtnVCf9PBvoQDnKl06gGOOD19Q==" crossorigin="anonymous"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css"> -->
+	<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+	<!-- <script src="//code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script> -->
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- 
+[if lt IE 9]>
+	<script src="../assets/js/ie8-responsive-file-warning.js"></script>
+<![endif]
+
+-->
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--
+[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]
+
+-->
+<!-- Favicons-->
+<!-- custom code that you want to insert in head section -->
+<!-- This is for head section-->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.1/backbone-min.js"></script>
+
+<style>
+	#form-container {
+		border: 1px dashed green;
+	}
+	#form-container div {
+		
+	}	
+	#form-container > *:hover {
+		border: 1px solid blue;
+
+	}
+</style>
+
+</head>
+<body style="background-image: linear-gradient(to left,rgba(153, 181, 244, 0.51) 0,#F55F6E 100%);">
+	<div class="container">
+
+		<div class="row">
+			<h2 class="text-center" style="position: fixed; top: 175px; left: -140px; -webkit-transform: rotate(90deg); background-color: burlywood;">Bootstrap Form Generator</h2>
+		</div>
 		<hr>
 
-		<div class="list-group">
-			<div class="list-group-item" id="hello_01">Simple Demo World With this ID: 001</div>
-			<div class="list-group-item" id="hello_02">Simple Demo World With this ID: 002</div>
-			<div class="list-group-item" id="hello_03">Simple Demo World With this ID: 003</div>
-			<div class="list-group-item" id="hello_04">Simple Demo World With this ID: 004</div>
-			<div class="list-group-item" id="hello_05">Simple Demo World With this ID: 005</div>
-			<div class="list-group-item" id="hello_06">Simple Demo World With this ID: 006</div>
-			<div class="list-group-item" id="hello_07">Simple Demo World With this ID: 007</div>
-			<div class="list-group-item" id="hello_08">Simple Demo World With this ID: 008</div>
-			<div class="list-group-item" id="hello_09">Simple Demo World With this ID: 009</div>
-			<div class="list-group-item" id="hello_10">Simple Demo World With this ID: 010</div>
+<!-- Template for Form generate -->
+<!-- 
+elem_name
+elem_class
+elem_type
+elem_id
+elem_style
+-->
+
+<script>
+	$.fn.serializeObject = function(){
+		var o = {};
+		var a = this.serializeArray();
+		$.each(a, function(){
+			if (o[this.name] !== undefined) {
+				if (!o[this.name].push) {
+					o[this.name] = [o[this.name]];
+				}
+				o[this.name].push(this.value || '');
+			} else {
+				o[this.name] = this.value || '';
+			}
+		});
+		return o;
+	};
+
+/*  You can get these scripts using jQuery.get()  Method.  */
+var input_comp = function(obj){
+var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
+with(obj||{}){
+__p+='\n';
+ var gw = (group_width == 0 || group_width == null)?4:group_width 
+__p+='\n';
+ var lw = (label_width == 0 || label_width == null)?3:label_width 
+__p+='\n';
+ var iw = (input_width == 0 || input_width == null)?9:input_width 
+__p+='\n<div class="form-group col-xs-'+
+((__t=( gw ))==null?'':__t)+
+' col-sm-'+
+((__t=( gw ))==null?'':__t)+
+' col-md-'+
+((__t=( gw ))==null?'':__t)+
+' col-lg-'+
+((__t=( gw ))==null?'':__t)+
+'" data-toggle="tooltip" title="'+
+((__t=( elem_name ))==null?'':__t)+
+'">\n';
+ var id = elem_name.split(" ").join("_") + "_id"; 
+__p+='\n';
+ var name = elem_name.split(" ").join("_") + "_name"; 
+__p+='\n<label for="'+
+((__t=( elem_name ))==null?'':__t)+
+'" class="col-lg-'+
+((__t=( lw ))==null?'':__t)+
+' col-md-'+
+((__t=( lw ))==null?'':__t)+
+' col-sm-'+
+((__t=( lw ))==null?'':__t)+
+' col-xs-'+
+((__t=( lw ))==null?'':__t)+
+' control-label">'+
+((__t=( elem_name ))==null?'':__t)+
+'</label>\n<div class="col-xs-'+
+((__t=( iw ))==null?'':__t)+
+' col-sm-'+
+((__t=( iw ))==null?'':__t)+
+' col-md-'+
+((__t=( iw ))==null?'':__t)+
+' col-lg-'+
+((__t=( iw ))==null?'':__t)+
+'">\n<input type="'+
+((__t=( elem_type ))==null?'':__t)+
+'" class="form-control '+
+((__t=( (elem_class != null || elem_class != "")?elem_class:"" ))==null?'':__t)+
+'" name="'+
+((__t=( name ))==null?'':__t)+
+'" id="'+
+((__t=( (elem_id == "" || elem_id == null)?id:elem_id ))==null?'':__t)+
+'" style="'+
+((__t=( (elem_style != null || elem_style != "")?elem_style:"" ))==null?'':__t)+
+'">\n</div>\n</div>\n';
+}
+return __p;
+};
+
+
+var select_comp = function(obj){
+var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
+with(obj||{}){
+__p+='\n';
+ var gw = (group_width == 0 || group_width == null)?4:group_width 
+__p+='\n';
+ var lw = (label_width == 0 || label_width == null)?3:label_width 
+__p+='\n';
+ var iw = (input_width == 0 || input_width == null)?9:input_width 
+__p+='\n';
+ var cbo = (combo_box_options == "" || combo_box_options == null)? [] : combo_box_options.split("|") 
+__p+='\n<div class="form-group col-xs-'+
+((__t=( gw ))==null?'':__t)+
+' col-sm-'+
+((__t=( gw ))==null?'':__t)+
+' col-md-'+
+((__t=( gw ))==null?'':__t)+
+' col-lg-'+
+((__t=( gw ))==null?'':__t)+
+'" data-toggle="tooltip" title="'+
+((__t=( elem_name ))==null?'':__t)+
+'">\n';
+ var id = elem_name.split(" ").join("_") + "_id"; 
+__p+='\n';
+ var name = elem_name.split(" ").join("_") + "_name"; 
+__p+='\n<label for="'+
+((__t=( elem_name ))==null?'':__t)+
+'" class="col-lg-'+
+((__t=( lw ))==null?'':__t)+
+' col-md-'+
+((__t=( lw ))==null?'':__t)+
+' col-sm-'+
+((__t=( lw ))==null?'':__t)+
+' col-xs-'+
+((__t=( lw ))==null?'':__t)+
+' control-label">'+
+((__t=( elem_name ))==null?'':__t)+
+'</label>\n<div class="col-xs-'+
+((__t=( iw ))==null?'':__t)+
+' col-sm-'+
+((__t=( iw ))==null?'':__t)+
+' col-md-'+
+((__t=( iw ))==null?'':__t)+
+' col-lg-'+
+((__t=( iw ))==null?'':__t)+
+'">\n<select name="'+
+((__t=( name ))==null?'':__t)+
+'" id="'+
+((__t=( (elem_id == "" || elem_id == null)?id:elem_id ))==null?'':__t)+
+'" class="form-control '+
+((__t=( (elem_class != null || elem_class != "")?elem_class:"" ))==null?'':__t)+
+'" style="'+
+((__t=( (elem_style != null || elem_style != "")?elem_style:"" ))==null?'':__t)+
+'">\n';
+ _.each(cbo, function(z){ 
+__p+='\n<option value="'+
+((__t=( z ))==null?'':__t)+
+'">'+
+((__t=( z.toUpperCase() ))==null?'':__t)+
+'</option>\n';
+	}); 
+__p+='\n</select>\n</div>\n</div>\n';
+}
+return __p;
+};
+
+
+</script>
+
+
+<!-- Template for Combobox -->
+<script type="text/template" id="formElem_SELECT_ID">
+<% var gw = (group_width == 0 || group_width == null)?4:group_width %>
+<% var lw = (label_width == 0 || label_width == null)?3:label_width %>
+<% var iw = (input_width == 0 || input_width == null)?9:input_width %>
+<% var cbo = (combo_box_options == "" || combo_box_options == null)? [] : combo_box_options.split("|") %>
+<div class="form-group col-xs-<%= gw %> col-sm-<%= gw %> col-md-<%= gw %> col-lg-<%= gw %>" data-toggle="tooltip" title="<%= elem_name %>">
+<% var id = elem_name.split(" ").join("_") + "_id"; %>
+<% var name = elem_name.split(" ").join("_") + "_name"; %>
+<label for="<%= elem_name %>" class="col-lg-<%= lw %> col-md-<%= lw %> col-sm-<%= lw %> col-xs-<%= lw %> control-label"><%= elem_name %></label>
+<div class="col-xs-<%= iw %> col-sm-<%= iw %> col-md-<%= iw %> col-lg-<%= iw %>">
+<select name="<%= name %>" id="<%= (elem_id == "" || elem_id == null)?id:elem_id %>" class="form-control <%= (elem_class != null || elem_class != "")?elem_class:"" %>" style="<%= (elem_style != null || elem_style != "")?elem_style:"" %>">
+<% _.each(cbo, function(z){ %>
+<option value="<%= z %>"><%= z.toUpperCase() %></option>
+<%	}); %>
+</select>
+</div>
+</div>
+</script>
+
+<!-- Template for Checkbox -->
+<script type="text/template" id="formElem_check_ID">
+<% var gw = (group_width == 0 || group_width == null)?4:group_width %>
+<% var lw = (label_width == 0 || label_width == null)?3:label_width %>
+<% var iw = (input_width == 0 || input_width == null)?9:input_width %>
+<div class="checkbox input-lg col-xs-<%= gw %> col-sm-<%= gw %> col-md-<%= gw %> col-lg-<%= gw %>" data-toggle="tooltip" title="<%= elem_name %>">
+<% var id = elem_name.split(" ")[0] + "_id"; %>
+<% var name = elem_name + "_name"; %>
+<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+<input type="checkbox" name="<%= name.split(" ")[0] %>" id="<%= (elem_id == "" || elem_id == null)?id:elem_id %>" class="<%= (elem_class != null || elem_class != "")?elem_class:"" %>">
+</div>
+<label for="<%= elem_name %>" class="control-label"><%= elem_name %></label>
+</div>
+</script>
+
+<!-- Template for Textarea -->
+<script id="formElem_textarea_ID" type="text/template">
+<% var gw = (group_width == 0 || group_width == null)?4:group_width %>
+<% var lw = (label_width == 0 || label_width == null)?3:label_width %>
+<% var iw = (input_width == 0 || input_width == null)?9:input_width %>
+<div class="checkbox input-lg col-xs-<%= gw %> col-sm-<%= gw %> col-md-<%= gw %> col-lg-<%= gw %>" data-toggle="tooltip" title="<%= elem_name %>">
+<% var id = elem_name.split(" ").join("_") + "_id"; %>
+<% var name = elem_name + "_name"; %>
+<label for="<%= elem_name %>" class="col-lg-<%= lw %> col-md-<%= lw %> col-sm-<%= lw %> col-xs-<%= lw %> control-label"><%= elem_name %></label>
+<div class="col-xs-<%= iw %> col-sm-<%= iw %> col-md-<%= iw %> col-lg-<%= iw %>">
+<textarea name="<%= name.split(" ").join("_") %>" id="<%= (elem_id == "" || elem_id == null)?id:elem_id %>" class="form-control <%= (elem_class != null || elem_class != "")?elem_class:"" %>"></textarea>
+</div>
+</div>
+</script>
+
+<!-- Template for radio -->
+<script type="text/template" id="formElem_radio_ID">
+<% var gw = (group_width == 0 || group_width == null)?4:group_width %>
+<% var lw = (label_width == 0 || label_width == null)?3:label_width %>
+<% var iw = (input_width == 0 || input_width == null)?9:input_width %>
+<div class="radio input-lg col-xs-<%= gw %> col-sm-<%= gw %> col-md-<%= gw %> col-lg-<%= gw %>" data-toggle="tooltip" title="<%= elem_name %>">
+<% var id = elem_name.split(" ")[0] + "_id"; %>
+<% var name = elem_name + "_name"; %>
+<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+<input type="radio" name="<%= name.split(" ")[0] %>" id="<%= (elem_id == "" || elem_id == null)?id:elem_id %>" class="<%= (elem_class != null || elem_class != "")?elem_class:"" %>">
+</div>
+<label for="<%= elem_name %>" class="control-label"><%= elem_name %></label>
+</div>
+</script>
+
+<!-- Template to show Generated Code as Modal -->
+<script id="saveGenCode_Template" type="text/template">
+<div class="modal fade" id="savegenFormcodeModal">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+<h4 class="modal-title">Generated Bootstrap HTML Code for Form</h4>
+</div>
+<div class="modal-body">
+<div class="container">
+<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+<textarea name="bscode" rows="20" class="form-control"><%= show_code %></textarea>
+</div>
+</div>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
+</script>
+
+<!-- Template to show Generated Code as Modal -->
+<script id="saveGenModalCode_Template" type="text/template">
+<div class="modal fade" id="savegenModalFormcodeModal">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+<h4 class="modal-title">Generated Bootstrap HTML Code for Form as Modal</h4>
+</div>
+<div class="modal-body">
+<div class="container">
+<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+<textarea name="bscode" rows="20" class="form-control">
+<div class="modal fade" id="modalid"><div class="modal-dialog modal-lg">
+<div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+<h4 class="modal-title">Modal Title</h4></div><div class="modal-body"><%= show_code %></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div></div></div></div>
+</textarea>
+</div>
+</div>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
+</script>
+
+		<div class="row" style="position:fixed; top:5px; width:inherit;z-index:100;">
+			<div class="well" style="box-shadow:2px 2px 10px 4px black;">
+				<div class="container">
+					<form class="form-horizontal" id="formGenID">
+						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+							<div class="form-group" data-toggle="tooltip" title="Define width for .form-group class">
+								<label for="group_width" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label">GW </label>
+								<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+									<select name="group_width" id="elem_gw_id" class="form-control">
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4" selected>4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" data-toggle="tooltip" title="Define width for .control-label class">
+							<div class="form-group">
+								<label for="Label_width" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label">LW </label>
+								<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+									<select name="label_width" id="elem_lw_id" class="form-control">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3" selected>3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="12">12</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+							<div class="form-group">
+								<label for="Input_width" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label" data-toggle="tooltip" title="Define width for .form-control class">IW </label>
+								<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+									<select name="input_width" id="elem_iw_id" class="form-control">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9" selected>9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="12">12</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+							<div class="form-group" data-toggle="tooltip" title="Widget label name">
+								<label for="name" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">Field</label>
+								<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+									<input type="text" class="form-control" name="elem_name" id="elem_name_id" placeholder="Field Name" autocomplete>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+							<div class="form-group" data-toggle="tooltip" title="Widget Type either input, combobox, ...">
+								<label for="type" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">Type</label>
+								<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+									<select name="elem_type" id="elem_type_id" class="form-control" >
+										<option value="text">INPUT</option>
+										<option value="select">SELECT</option>
+										<option value="checkbox">CHECKBOX</option>
+										<option value="radio">RADIO</option>
+										<option value="textarea">TEXTAREA</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix visible-lg-block visible-md-block visible-sm-block visible-xs-block"></div>
+						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+							<div class="form-group" data-toggle="tooltip" title="Additional Bootstrap Class that you want to apply for input control">
+								<label for="class" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">Class</label>
+								<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+									<input type="text" class="form-control" name="elem_class" id="elem_class_id" list="possibleClasses" placeholder="form-control">
+								</div>
+								<datalist id="possibleClasses">
+									<option value="text-center"></option>
+									<option value="text-left"></option>
+									<option value="text-right"></option>
+									<option value="btn-default"></option>
+									<option value="btn-primary"></option>
+									<option value="btn-success"></option>
+									<option value="btn-info"></option>
+									<option value="btn-warning"></option>
+									<option value="btn-danger"></option>
+									<option value="btn-sm"></option>
+									<option value="btn-md"></option>
+									<option value="btn-lg"></option>
+									<option value="btn-block"></option>
+									<option value="input-sm"></option>
+									<option value="input-md"></option>
+									<option value="input-lg"></option>
+									<option value="well"></option>
+									<option value="well well-sm"></option>
+									<option value="well well-md"></option>
+									<option value="well well-lg"></option>
+								</datalist>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+							<div class="form-group" data-toggle="tooltip" title="Custom ID for THIS Widget">
+								<label for="id" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">ID</label>
+								<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+									<input type="text" class="form-control" name="elem_id" id="elem_id_id" placeholder="mycontrol">
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+							<div class="form-group" data-toggle="tooltip" title="Custom CSS Style for input control">
+								<!-- Style Attributes for Input Control -->
+								<label for="style" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">Style</label>
+								<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+									<input type="text" class="form-control" name="elem_style" id="elem_style_id" list="suggestedStyles" placeholder="width:90px;height:100px;">
+								</div>
+								<datalist id="suggestedStyles">
+									<option value="max-width:200px;margin:0px auto;"></option>
+									<option value="background-color:red;"></option>
+								</datalist>
+							</div>
+						</div>
+						<div class="clearfix visible-lg-block visible-md-block visible-sm-block visible-xs-block"></div>
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="combobox_options" class="control-label col-lg-1 col-md-1 col-sm-1 col-xs-1" style="left: -20px;">C.B.O</label>
+								<div class="col-lg-11 col-md-11 col-sm-11 col-xs-11" style="left: -30px;">
+									<textarea type="text" class="form-control" name="combo_box_options" id="elem_combo_op_id" placeholder="(Only for ComboBox Widget) | Seperated list of ComboBox Items."></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix visible-lg-block visible-md-block visible-sm-block visible-xs-block"></div>
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="btn-group">
+								<button class="btn btn-default btn-sm" id="ins_hrtag" data-toggle="tooltip" title="Insert hr TAG">hr</button>
+								<button class="btn btn-default btn-sm" id="ins_h2tag" data-toggle="tooltip" title="Insert h2 Tag">h2</button>
+								<button class="btn btn-default btn-sm" id="ins_h3tag" data-toggle="tooltip" title="Insert h3 Tag">h3</button>
+								<button class="btn btn-default btn-sm" id="ins_h4tag" data-toggle="tooltip" title="Insert h4 Tag">h4</button>
+								<button class="btn btn-default btn-sm" id="ins_h5tag" data-toggle="tooltip" title="Insert h5 Tag">h5</button>
+							</div>
+							<div class="btn-group">
+								<button class="btn btn-default btn-sm" id="ins_default_btn" data-toggle="tooltip" title="button[class='default']">default</button>
+								<button class="btn btn-primary btn-sm" id="ins_primary_btn" data-toggle="tooltip" title="button[class='primary']">primary</button>
+								<button class="btn btn-success btn-sm" id="ins_success_btn" data-toggle="tooltip" title="button[class='success']">sucess</button>
+								<button class="btn btn-info btn-sm" id="ins_info_btn" data-toggle="tooltip" title="button[class='info']">info</button>
+								<button class="btn btn-warning btn-sm" id="ins_warning_btn" data-toggle="tooltip" title="button[class='warning']">warning</button>
+								<button class="btn btn-danger btn-sm" id="ins_danger_btn" data-toggle="tooltip" title="button[class='danger']">danger</button>
+								<button class="btn btn-default btn-sm" id="ins_submit_btn" data-toggle="tooltip" title="button[type='submit']">Submit</button>
+							</div>
+						</div>
+						<div class="clearfix visible-lg-block visible-md-block visible-sm-block visible-xs-block"></div>
+						<button class="btn btn-info" id="acc_Tooltip" data-toggle="tooltip" title="Activate Tooltips">Tooltip</button>
+						<button class="btn btn-warning" id="appendClearfix" data-toggle="tooltip" title="Append Clearfix to Form to maintain consistent height.">Clearfix</button>
+						<button class="btn btn-primary col-lg-1" id="form_gen" data-toggle="tooltip" title="Append THIS Form Widget">Submit</button>
+						<button class="btn btn-success" id="saveGenForm" data-toggle="tooltip" title="Save Generated HTML Code">Form Code</button>
+						<button class="btn btn-info" id="saveGenFormasModal" data-toggle="tooltip" title="Save Generated HTML Code within BS Modal">Modal Code</button>
+						<button class="btn btn-danger" id="clearAllformComp" data-toggle="tooltip" title="Clear All Bootstrap Components">Clear Comp.</button>
+					</form>
+				</div>
+			</div>
+		</div>
+
+
+		<p class="small"><u>Double Click to remove any generated form Element.</u></p>
+		<div class="row" id="form-visible-area" style="background:white;position: absolute;top: 295px;width: inherit;">
+			<div class="form-horizontal" id="form-container">
+				
+			</div>
 		</div>
 	</div>
+
+<script>
+	 /*  Append clearfix to form - Make Form Elements height consistent  */
+	$("#appendClearfix").click(function(ev){
+		$("#form-container").append('<div class="clearfix visible-lg-block visible-md-block visible-sm-block visible-xs-block"></div>');
+		return false;
+	});
+
+	$("#ins_hrtag").click(function(ev){
+		$("#form-container").append('<hr />');
+		return false;
+	});
+
+	$("#ins_h2tag").click(function(ev){
+		if ($("#elem_name_id").val() != "" && $("#elem_name_id").val() != null)
+			$("#form-container").append("<h2 class='" + $("#elem_class_id").val() + "' style='" + $("#elem_style_id").val() + "'>" + $("#elem_name_id").val() + "</h2>");
+		else 
+			$("#elem_name_id").addClass("has-error");
+		return false;
+	});
+	$("#ins_h3tag").click(function(ev){
+		$("#form-container").append("<h3 class='" + $("#elem_class_id").val() + "' style='" + $("#elem_style_id").val() + "'>" + $("#elem_name_id").val() + "</h3>");
+		return false;
+	});
+	$("#ins_h4tag").click(function(ev){
+		$("#form-container").append("<h4 class='" + $("#elem_class_id").val() + "' style='" + $("#elem_style_id").val() + "'>" + $("#elem_name_id").val() + "</h4>");
+		return false;
+	});
+	$("#ins_h5tag").click(function(ev){
+		$("#form-container").append("<h5 class='" + $("#elem_class_id").val() + "' style='" + $("#elem_style_id").val() + "'>" + $("#elem_name_id").val() + "</h5>");
+		return false;
+	});
+
+	$("#ins_default_btn").click(function(ev){
+		$("#form-container").append('<button type="button" class="btn btn-default ' + $("#elem_class_id").val() + '" style="' + $("#elem_style_id").val() + '">' + $("#elem_name_id").val() + "</button>");
+		return false;
+	});
+	$("#ins_primary_btn").click(function(ev){
+		$("#form-container").append('<button type="button" class="btn btn-primary ' + $("#elem_class_id").val() + '" style="' + $("#elem_style_id").val() + '">' + $("#elem_name_id").val() + "</button>");
+		return false;
+	});
+	$("#ins_success_btn").click(function(ev){
+		$("#form-container").append('<button type="button" class="btn btn-success ' + $("#elem_class_id").val() + '" style="' + $("#elem_style_id").val() + '">' + $("#elem_name_id").val() + "</button>");
+		return false;
+	});
+	$("#ins_info_btn").click(function(ev){
+		$("#form-container").append('<button type="button" class="btn btn-info ' + $("#elem_class_id").val() + '" style="' + $("#elem_style_id").val() + '">' + $("#elem_name_id").val() + "</button>");
+		return false;
+	});
+	$("#ins_warning_btn").click(function(ev){
+		$("#form-container").append('<button type="button" class="btn btn-warning ' + $("#elem_class_id").val() + '" style="' + $("#elem_style_id").val() + '">' + $("#elem_name_id").val() + "</button>");
+		return false;
+	});
+	$("#ins_danger_btn").click(function(ev){
+		$("#form-container").append('<button type="button" class="btn btn-danger ' + $("#elem_class_id").val() + '" style="' + $("#elem_style_id").val() + '">' + $("#elem_name_id").val() + "</button>");
+		return false;
+	});
+	$("#ins_submit_btn").click(function(ev){
+		$("#form-container").append('<button type="submit" class="btn btn-default ' + $("#elem_class_id").val() + '" style="' + $("#elem_style_id").val() + '">' + $("#elem_name_id").val() + "</button>");
+		return false;
+	});
+
+
+	$("#clearAllformComp").click(function(ev){
+		$("#form-container").html("");
+		return false;
+	});
+
+	/*  Activate Tooltip  */
+	$("#acc_Tooltip").click(function(ev){
+		/*  Init tooltip Widget  */
+		$('[data-toggle="tooltip"]').tooltip({ container: 'body', placement: 'top'});
+		return false;
+	});
+
+	$("#saveGenForm").click(function(ev){
+		$("#savegenFormcodeModal").remove();
+		var form_temp_x = _.template($("#saveGenCode_Template").html());
+		$("body").append(form_temp_x({ show_code: $("#form-visible-area").html() }));
+		$("#savegenFormcodeModal").modal();
+		return false;
+	});
+	$("#saveGenFormasModal").click(function(ev){
+		$("#savegenModalFormcodeModal").remove();
+		var form_temp_y = _.template($("#saveGenModalCode_Template").html());
+		$("body").append(form_temp_y({ show_code: $("#form-visible-area").html() }));
+		$("#savegenModalFormcodeModal").modal();
+		return false;
+	});
+
+
+	/*  Compile form Element template  */
+	$("#form_gen").click(function(ev){
+		if ($("#elem_name_id").val() == null || $("#elem_name_id").val() == "") {
+			alert("name can not be null.");
+			return false;
+		}
+		var obj = $(ev.currentTarget).parent();
+		if ($("#elem_type_id").val() == 'text') {
+			$("#form-container").append(input_comp(obj.serializeObject()));
+		} else if ($("#elem_type_id").val() == 'select') {
+			$("#form-container").append(select_comp(obj.serializeObject()));
+		} else if ($("#elem_type_id").val() == 'checkbox') {
+			var w = _.template($("#formElem_check_ID").html());
+			$("#form-container").append(w(obj.serializeObject()));
+		} else if ($("#elem_type_id").val() == 'radio') {
+			var v = _.template($("#formElem_radio_ID").html());
+			$("#form-container").append(v(obj.serializeObject()));
+		} else if ($("#elem_type_id").val() == 'textarea') {
+			var u = _.template($("#formElem_textarea_ID").html());
+			$("#form-container").append(u(obj.serializeObject()));
+		}
+
+		$("#form-container *").unbind();
+		/*  Init form Editor  */
+		$("#form-container > *").click(function(ev){
+			console.log(ev);
+			/*if (ev.keyCode == 100)*/
+			$(ev.currentTarget).remove();
+		});
+
+		/*console.log(obj);*/
+		/*console.log(obj.serializeObject());*/
+		return false;
+	});
+
+</script>
 
 </body>
 </html>
