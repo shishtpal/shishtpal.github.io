@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Demos - Form Generator Lib </title>
+    <link rel="stylesheet" href="//bootswatch.com/cosmo/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.0/animate.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/css/bootstrap-datepicker3.min.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Bootstrap Form Generator using JSON</h1>
+        <hr>
+        <div id="form_container">
+
+        </div>
+    </div>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/js/bootstrap-datepicker.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="formgen.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+
+var i = new GenerateForm("#form_container");
+var form = {
+    form_key: "thisForm",
+    action: "/apis/testing",
+    method: "POST",
+    caption: "Testing Simple Html Form",
+    id: "mygenform",
+    style: "border:2px solid red;",
+    schema: [
+        {
+            type: "heading",
+            cont_grid: [12],
+            label: "Simple Hello world",
+            label_class: " text-center btn-warning btn-sm",
+            style: "",
+            control_id: "demoworld"
+        },
+        {
+            cont_grid: [12, 6, 4, 3],
+            type: "text",
+            label: "Name",
+            name: "name",
+            placeholder: "Your Name ?"
+        },
+        {
+            cont_grid: [12, 6, 4, 3],
+            type: "text",
+            label: "Email",
+            name: "email",
+            placeholder: "Your Email ?",
+            autocomplete: true
+        },
+        {
+            cont_grid: [12, 6, 4, 3],
+            type: "text",
+            label: "Mobile No.",
+            name: "mobileno",
+            placeholder: "Your Mobile no. ?"
+
+        },
+        {
+            type: "date",
+            cont_grid: [12, 6, 4, 3],
+            cont_style: "",
+            label: "Admission Date",
+            name: "admdate",
+            control_id: "admdateID",
+            style: "",
+            placeholder: "01/05/2014",
+            value: "05/08/1992"
+        },
+        {
+            type: "clearfix"
+        },
+        {
+            cont_grid: [12, 6],
+            cont_class: "",
+            cont_style: "",
+            type: "photo",
+            label: "Select Photo",
+            name: "mypic",
+            control_id: "myPhoto",
+            img_default: "/_assets/img/elect001.png",
+            img_alt: "My Photo",
+            img_style: "",
+            img_id: "myphotoid",
+        },
+        {
+            cont_grid: [12,6],
+            cont_class: "",
+            cont_style: "",
+            type: "list",
+            label: "Likes ?",
+            name: "likes[]",
+            control_id: "mylikes",
+            items: ["01|Play", "02|Reading", "03|Game"],
+        },
+        {
+            name: "Click",
+            value: "Submit",
+            control_id: "formsubmit",
+            control_class: "btn-primary btn-block",
+            style: "",
+            type: "submit"
+        }
+    ]
+};
+i.config(form);
+i.injectFormCompAsNew();
+
+</script>
+
+</body>
+</html>
