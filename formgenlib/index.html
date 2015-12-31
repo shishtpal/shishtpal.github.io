@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Demos - Form Generator Lib </title>
     <link rel="stylesheet" href="//bootswatch.com/cosmo/bootstrap.min.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.0/animate.min.css">
+    <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.0/animate.min.css"> -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/css/bootstrap-datepicker3.min.css">
 </head>
 <body>
@@ -49,6 +49,7 @@ var form = {
             cont_grid: [12, 6, 4, 3],
             type: "text",
             label: "Name",
+            title: "Your Name?",
             name: "name",
             placeholder: "Your Name ?"
         },
@@ -56,6 +57,7 @@ var form = {
             cont_grid: [12, 6, 4, 3],
             type: "text",
             label: "Email",
+            title: "Your Email?",
             name: "email",
             placeholder: "Your Email ?",
             autocomplete: true
@@ -64,6 +66,7 @@ var form = {
             cont_grid: [12, 6, 4, 3],
             type: "text",
             label: "Mobile No.",
+            title: "Your Mobile No?",
             name: "mobileno",
             placeholder: "Your Mobile no. ?"
 
@@ -73,6 +76,7 @@ var form = {
             cont_grid: [12, 6, 4, 3],
             cont_style: "",
             label: "Admission Date",
+            title: "Admission Date?",
             name: "admdate",
             control_id: "admdateID",
             style: "",
@@ -83,27 +87,51 @@ var form = {
             type: "clearfix"
         },
         {
-            cont_grid: [12, 6],
+            cont_grid: [12, 6, 4],
+            type: "select",
+            label: "Gender",
+            title: "Gender?",
+            name: "gender",
+            control_id: "genderID",
+            items: ["00|Other", "01|Male", "02|Female"]
+        },
+        {
+            cont_grid: [12, 6, 4],
             cont_class: "",
             cont_style: "",
             type: "photo",
             label: "Select Photo",
+            title: "Your Photo",
             name: "mypic",
             control_id: "myPhoto",
-            img_default: "Faculty.png",
+            img_default: "/_assets/img/elect001.png",
             img_alt: "My Photo",
             img_style: "",
             img_id: "myphotoid",
         },
         {
-            cont_grid: [12,6],
+            cont_grid: [12,6, 4],
             cont_class: "",
             cont_style: "",
             type: "list",
             label: "Likes ?",
+            title: "What You likes?",
             name: "likes[]",
             control_id: "mylikes",
             items: ["01|Play", "02|Reading", "03|Game"],
+        },
+        {
+            type: "clearfix"
+        },
+        {
+            cont_grid: [12],
+            type: "textarea",
+            label: "About me?",
+            name: "aboutme",
+            control_id: "aboutmeID",
+            style: "background:cyan;",
+            title: "About me",
+            value: "Hello World"
         },
         {
             name: "Click",
@@ -117,6 +145,7 @@ var form = {
 };
 i.config(form);
 i.injectFormCompAsNew();
+i.listen();
 
 </script>
 
